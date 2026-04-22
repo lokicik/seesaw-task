@@ -72,9 +72,25 @@ function getPlankLocalOffset(event) {
   return Math.max(-PLANK_LENGTH / 2, Math.min(PLANK_LENGTH / 2, localX));
 }
 
+function generateWeight() {
+  return Math.floor(Math.random() * 10) + 1;
+}
+
+function addObject(weight, offset) {
+  state.objects.push({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2),
+    weight: weight,
+    offset: offset,
+    side: offset >= 0 ? 'right' : 'left'
+  });
+}
+
 function handlePlankClick(event) {
   const offset = getPlankLocalOffset(event);
-  console.log('offset from pivot:', offset);
+  const weight = generateWeight();
+  addObject(weight, offset);
+  state.targetAngle = getTargetAngle();
+  console.log('object added, target angle:', state.targetAngle);
 }
 
 function handleReset() {
