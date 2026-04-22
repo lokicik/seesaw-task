@@ -38,6 +38,30 @@ function getSideTotals() {
   return { left, right };
 }
 
+// --- Animation ---
+let rafId = null;
+
+function animatePlank(target) {
+  if (rafId) cancelAnimationFrame(rafId);
+  const start = state.currentAngle;
+  if (Math.abs(target - start) < 0.01) return;
+  let startTime = null;
+
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    const progress = Math.min((ts - startTime) / 600, 1);
+    const eased = 1 - Math.pow(1 - progress, 2);
+    state.currentAngle = start + (target - start) * eased;
+    if (progress < 1) {
+      rafId = requestAnimationFrame(step);
+    } else {
+      state.currentAngle = target;
+      rafId = null;
+    }
+  }
+  rafId = requestAnimationFrame(step);
+}
+
 // --- Render ---
 function renderPlankAngle(angle) {
   document.getElementById('plank').style.transform = 'rotate(' + angle + 'deg)';
@@ -62,6 +86,7 @@ function renderObjects() {
 }
 
 function renderScene() {
+  animatePlank(state.targetAngle);
   renderPlankAngle(state.targetAngle);
   renderObjects();
   updateHUD();
