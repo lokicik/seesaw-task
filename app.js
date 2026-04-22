@@ -37,3 +37,28 @@ function getSideTotals() {
   });
   return { left, right };
 }
+
+// --- Render ---
+function renderPlankAngle(angle) {
+  document.getElementById('plank').style.transform = 'rotate(' + angle + 'deg)';
+}
+
+function updateHUD() {
+  const totals = getSideTotals();
+  document.getElementById('hud-left').textContent = totals.left + ' kg';
+  document.getElementById('hud-right').textContent = totals.right + ' kg';
+}
+
+function renderScene() {
+  renderPlankAngle(state.targetAngle);
+  updateHUD();
+}
+
+// --- Init ---
+function init() {
+  state.targetAngle = getTargetAngle();
+  state.currentAngle = state.targetAngle;
+  renderScene();
+}
+
+document.addEventListener('DOMContentLoaded', init);
