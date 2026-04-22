@@ -107,3 +107,22 @@ body {
   top: 46px;
   left: -40px;
 }
+
+.object {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e74c3c, #922b21);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  bottom: 100%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+}

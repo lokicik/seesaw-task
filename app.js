@@ -49,8 +49,21 @@ function updateHUD() {
   document.getElementById('hud-right').textContent = totals.right + ' kg';
 }
 
+function renderObjects() {
+  const plank = document.getElementById('plank');
+  plank.querySelectorAll('.object').forEach(function (el) { el.remove(); });
+  state.objects.forEach(function (obj) {
+    const el = document.createElement('div');
+    el.className = 'object';
+    el.style.left = (PLANK_LENGTH / 2 + obj.offset) + 'px';
+    el.textContent = obj.weight + 'kg';
+    plank.appendChild(el);
+  });
+}
+
 function renderScene() {
   renderPlankAngle(state.targetAngle);
+  renderObjects();
   updateHUD();
 }
 
@@ -90,7 +103,7 @@ function handlePlankClick(event) {
   const weight = generateWeight();
   addObject(weight, offset);
   state.targetAngle = getTargetAngle();
-  console.log('object added, target angle:', state.targetAngle);
+  renderScene();
 }
 
 function handleReset() {
