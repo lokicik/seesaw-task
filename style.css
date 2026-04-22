@@ -1,0 +1,109 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #1a1a2e;
+  color: #eee;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 500px;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 16px;
+}
+
+.hud-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+}
+
+.hud-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888;
+}
+
+.hud-weight {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 4px;
+}
+
+.reset-btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.scene {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, #16213e 0%, #0f3460 100%);
+}
+
+.fulcrum-wrap {
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+.plank {
+  position: absolute;
+  width: 400px;
+  height: 20px;
+  background: linear-gradient(180deg, #8b6914 0%, #5c4a1e 100%);
+  border-radius: 4px;
+  top: -10px;
+  left: -200px;
+  transform-origin: center center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* üçgen */
+.pivot {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-bottom: 36px solid #95a5a6;
+  top: 10px;
+  left: -18px;
+  z-index: -1;
+}
+
+.base {
+  position: absolute;
+  width: 80px;
+  height: 10px;
+  background: #7f8c8d;
+  border-radius: 3px;
+  top: 46px;
+  left: -40px;
+}
