@@ -60,8 +60,21 @@ function bindEvents() {
   document.getElementById('reset-btn').addEventListener('click', handleReset);
 }
 
+function getPlankLocalOffset(event) {
+  const plank = document.getElementById('plank');
+  const rect = plank.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const dx = event.clientX - cx;
+  const dy = event.clientY - cy;
+  const rad = state.currentAngle * (Math.PI / 180);
+  const localX = dx * Math.cos(-rad) - dy * Math.sin(-rad);
+  return Math.max(-PLANK_LENGTH / 2, Math.min(PLANK_LENGTH / 2, localX));
+}
+
 function handlePlankClick(event) {
-  console.log('plank clicked', event.clientX, event.clientY);
+  const offset = getPlankLocalOffset(event);
+  console.log('offset from pivot:', offset);
 }
 
 function handleReset() {
