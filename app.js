@@ -129,6 +129,7 @@ function handlePlankClick(event) {
   const weight = generateWeight();
   addObject(weight, offset);
   state.targetAngle = getTargetAngle();
+  saveState();
   renderScene();
 }
 
@@ -136,11 +137,42 @@ function handleReset() {
   console.log('reset clicked');
 }
 
+// --- Storage ---
+function saveState() {
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify({ objects: state.objects }));
+  } catch (e) {}
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed.objects)) return null;
+    return parsed;
+  } catch (e) {
+    return null;
+  }
+}
+
 // --- Init ---
 function init() {
+  const saved = loadState();
+  if (saved) state.objects = saved.objects;
+
   state.targetAngle = getTargetAngle();
   state.currentAngle = state.targetAngle;
-  renderScene();
+
+  // Sayfa yüklemede animasyon olmadan snap
+  const plank = document.getElementById('plank');
+  plank.style.transition = 'none';
+  renderPlankAngle(state.targetAngle);
+  plank.getBoundingClientRect();
+  plank.style.transition = '';
+
+  renderObjects();
+  updateHUD();
   bindEvents();
 }
 
