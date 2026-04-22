@@ -85,6 +85,16 @@ function updateHUD() {
   }
 }
 
+function renderTicks() {
+  const plank = document.getElementById('plank');
+  for (let offset = -200; offset <= 200; offset += 50) {
+    const tick = document.createElement('div');
+    tick.className = offset % 100 === 0 ? 'tick major' : 'tick';
+    tick.style.left = (PLANK_LENGTH / 2 + offset) + 'px';
+    plank.appendChild(tick);
+  }
+}
+
 function renderObjects() {
   const plank = document.getElementById('plank');
   plank.querySelectorAll('.object').forEach(function (el) { el.remove(); });
@@ -186,6 +196,7 @@ function init() {
   plank.getBoundingClientRect();
   plank.style.transition = '';
 
+  renderTicks();
   renderObjects();
   updateHUD();
   bindEvents();
