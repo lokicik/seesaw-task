@@ -82,7 +82,8 @@ function getPlankLocalOffset(event) {
   const dy = event.clientY - cy;
   const rad = state.currentAngle * (Math.PI / 180);
   const localX = dx * Math.cos(-rad) - dy * Math.sin(-rad);
-  return Math.max(-PLANK_LENGTH / 2, Math.min(PLANK_LENGTH / 2, localX));
+  const maxOffset = PLANK_LENGTH / 2 - OBJECT_SIZE / 2;
+  return Math.max(-maxOffset, Math.min(maxOffset, localX));
 }
 
 function generateWeight() {
