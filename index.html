@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seesaw Simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="hud">
+    <div class="hud-side left">
+      <span class="hud-label">Left</span>
+      <span class="hud-weight" id="hud-left">0 kg</span>
+    </div>
+    <button class="reset-btn" id="reset-btn">Reset</button>
+    <div class="hud-side right">
+      <span class="hud-label">Right</span>
+      <span class="hud-weight" id="hud-right">0 kg</span>
+    </div>
+  </div>
+
+  <div class="scene" id="scene">
+    <div class="fulcrum-wrap" id="fulcrum-wrap">
+      <div class="plank" id="plank"></div>
+      <div class="pivot" id="pivot"></div>
+      <div class="base" id="base"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
