@@ -69,8 +69,20 @@ function renderPlankAngle(angle) {
 
 function updateHUD() {
   const totals = getSideTotals();
-  document.getElementById('hud-left').textContent = totals.left + ' kg';
-  document.getElementById('hud-right').textContent = totals.right + ' kg';
+  const leftEl = document.getElementById('hud-left');
+  const rightEl = document.getElementById('hud-right');
+  leftEl.textContent = totals.left + ' kg';
+  rightEl.textContent = totals.right + ' kg';
+  leftEl.className = 'hud-weight';
+  rightEl.className = 'hud-weight';
+  if (totals.left === totals.right) {
+    leftEl.classList.add('balanced');
+    rightEl.classList.add('balanced');
+  } else if (totals.left > totals.right) {
+    leftEl.classList.add('heavier');
+  } else {
+    rightEl.classList.add('heavier');
+  }
 }
 
 function renderObjects() {
@@ -134,7 +146,10 @@ function handlePlankClick(event) {
 }
 
 function handleReset() {
-  console.log('reset clicked');
+  state.objects = [];
+  state.targetAngle = getTargetAngle();
+  saveState();
+  renderScene();
 }
 
 // --- Storage ---

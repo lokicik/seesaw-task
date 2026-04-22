@@ -55,6 +55,19 @@ body {
   padding: 8px 20px;
   font-size: 14px;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.reset-btn:hover {
+  background: #c0392b;
+}
+
+.hud-weight.heavier {
+  color: #e74c3c;
+}
+
+.hud-weight.balanced {
+  color: #2ecc71;
 }
 
 .scene {
