@@ -54,11 +54,26 @@ function renderScene() {
   updateHUD();
 }
 
+// --- Events ---
+function bindEvents() {
+  document.getElementById('plank').addEventListener('click', handlePlankClick);
+  document.getElementById('reset-btn').addEventListener('click', handleReset);
+}
+
+function handlePlankClick(event) {
+  console.log('plank clicked', event.clientX, event.clientY);
+}
+
+function handleReset() {
+  console.log('reset clicked');
+}
+
 // --- Init ---
 function init() {
   state.targetAngle = getTargetAngle();
   state.currentAngle = state.targetAngle;
   renderScene();
+  bindEvents();
 }
 
 document.addEventListener('DOMContentLoaded', init);
